@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Digests;
 using Org.BouncyCastle.Crypto.Macs;
+using Org.BouncyCastle.Crypto.Prng;
 
 namespace Console_Dice_Game
 {
@@ -17,6 +18,16 @@ namespace Console_Dice_Game
         public FairRandomGenerator()
         {
             _secretKey = GenerateRandomKey();
+        }
+
+        public int ComputerNumber(int maxValue)
+        {
+            int randomNumber = RandomNumberGenerator.GetInt32(0, maxValue);
+            var hmac = GenerateHMAC(randomNumber);
+            Console.WriteLine($"I selected a random value in the range 0..{maxValue - 1}");
+            Console.WriteLine($"(HMAC={hmac}).");
+
+            return randomNumber;
         }
 
         public string GenerateHMAC(int number)
