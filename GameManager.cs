@@ -1,47 +1,29 @@
-﻿using Org.BouncyCastle.Crypto.Prng;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Console_Dice_Game
 {
-    class GameManager
+    public class GameManager
     {
-        private List<Dice> diceList;
-        private DiceDistribute selectDice;
-        private ManageFirstMove firstMove;
-        private ManageRolling manageRolling;
-        private FairRandomGenerator fairRandomGenerator;
-
-        public GameManager(List<Dice> diceList)
-        {
-            this.diceList = diceList;
-            this.selectDice = new DiceDistribute();
-            this.firstMove = new ManageFirstMove();
-            this.manageRolling = new ManageRolling();
-            this.fairRandomGenerator = new FairRandomGenerator();
-        }
+        public static List<Dice> diceList = [];
+        private readonly DiceDistributor diceDistributor = new();
+        private readonly FirstMoveChecker firstMoveChecker = new();
+        private readonly ManageRoller manageRoller = new();
 
         public void StartGame()
         {
-            Console.WriteLine("Let's determine who makes the first move.");
-            string firstMover = firstMove.checkMove();
-            var dices = selectDice.chooseDice(firstMover, diceList);
+            Console.WriteLine("\nLet's determine who makes the first move.");
+            string firstMover = firstMoveChecker.CheckMove();
+            var dices = diceDistributor.ChooseDice(firstMover, diceList);
 
-            int computerResult = manageRolling.checkRoll(dices[0]);
-            Console.WriteLine($"My roll result is {computerResult}.");
+            int computerResult = manageRoller.CheckRoll(dices[0]);
+            Console.WriteLine($"My roll result is {computerResult}.\n\nIt's time for your roll.");
 
-            Console.WriteLine("\nIt's time for your roll.");
-            int userResult = manageRolling.checkRoll(dices[1]);
+            int userResult = manageRoller.CheckRoll(dices[1]);
             Console.WriteLine($"Your roll result is {userResult}.");
 
             if (computerResult == userResult)
-                Console.WriteLine($"It's a tie. {computerResult} = {userResult}");
+                Console.WriteLine($"It's a tie. ({computerResult} == {userResult})");
             else
-                Console.WriteLine(computerResult > userResult ? $"I Win {computerResult} > {userResult}" : $"You win {computerResult} < {userResult}");
+                Console.WriteLine(computerResult > userResult ? $"I Win ({computerResult} > {userResult})" : $"You win ({computerResult} < {userResult})");
         }
     }
 }

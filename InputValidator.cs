@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Console_Dice_Game
 {
-    class InputValidation
+    public class InputValidator
     {
-        public int checkValue(Dictionary<string, string> validList, string message)
+        public int CheckValue(Dictionary<string, string> validList, string message)
         {
             string inputValue;
             while (true)
@@ -25,14 +20,14 @@ namespace Console_Dice_Game
 
                 if (inputValue.Equals("?"))
                 {
-                    Console.WriteLine("\nDisplay Probability Table");
+                    HelpTableGenerator.DisplayHelpTable();
                     continue;
                 }
 
                 if (validList.ContainsKey(inputValue))
                     break;
-                else
-                    Console.WriteLine($"\nInvalid input. Please enter only those value: {string.Join(",", validList.Keys)}.");
+                
+                Console.WriteLine($"\nInvalid input. Please enter only : {string.Join(",", validList.Keys)}.");
             }
 
             return int.Parse(inputValue);
