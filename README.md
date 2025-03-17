@@ -3,7 +3,7 @@
 
 ![Screenshot_7](https://github.com/user-attachments/assets/7812fd68-fff9-411a-bcfc-8f852bd5369c)
 
-Check-out Video Here ---> https://drive.google.com/file/d/1gOoCTdjTnGweXInAOKl6pWY3lmljLqZr/view?usp=drive_link
+Check-out Video Here ---> https://drive.google.com/file/d/1gOoCTdjTnGweXInAOKl6pWY3lmljLqZr/view
 
 ## Contributing
 If you'd like to contribute to this project, please follow these guidelines:
